@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace 'com.example.lemonadeapp'
+    namespace 'com.example.lemonade_app'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.lemonadeapp"
-        minSdk 24
+        applicationId "com.example.lemonade_app"
+        minSdk 25
         targetSdk 33
         versionCode 1
         versionName "1.0"

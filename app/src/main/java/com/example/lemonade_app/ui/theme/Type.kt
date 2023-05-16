@@ -1,4 +1,4 @@
-package com.example.lemonadeapp.ui.theme
+package com.example.lemonade_app.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

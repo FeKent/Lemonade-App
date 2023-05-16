@@ -1,4 +1,4 @@
-package com.example.lemonadeapp
+package com.example.lemonade_app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.lemonadeapp.ui.theme.LemonadeAppTheme
+import com.example.lemonade_app.ui.theme.LemonadeAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

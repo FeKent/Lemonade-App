@@ -1,4 +1,4 @@
-package com.example.lemonadeapp.ui.theme
+package com.example.lemonade_app.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

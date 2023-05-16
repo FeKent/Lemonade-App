@@ -1,4 +1,4 @@
-package com.example.lemonadeapp
+package com.example.lemonade_app
 
 import org.junit.Test
 
