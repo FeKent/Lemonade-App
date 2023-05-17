@@ -12,6 +12,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -40,10 +41,13 @@ class MainActivity : ComponentActivity() {
 @Preview (showBackground = true)
 @Composable
 fun LemonadeApp() {
-    LemonScreen(
+
+    Scaffold(topBar = { TopAppBar(title = {"Lemonade"}, backgroundColor = Color.Yellow)
+    }, content = LemonScreen(
         textLabelResourceId = R.string.lemon_select,
-        drawableResourceId = R.drawable.lemon_tree,
+        drawableResourceId = R.drawable.lemon_tree ,
         contentDescriptionId = R.string.tree_content_description,
+    )
     )
 }
 
@@ -54,7 +58,7 @@ fun LemonScreen(
     drawableResourceId: Int,
     contentDescriptionId: Int,
     modifier: Modifier = Modifier
-){
+): @Composable (PaddingValues) -> Unit {
     Box(
         modifier = modifier
     ){
