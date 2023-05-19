@@ -1,6 +1,7 @@
 package com.example.lemonade_app
 
 import android.annotation.SuppressLint
+import android.icu.text.ListFormatter.Width
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,7 +15,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -93,6 +96,8 @@ fun LemonScreen(
                     modifier = Modifier
                         .wrapContentSize()
                         .padding(24.dp)
+                        .width(200.dp)
+                        .height(200.dp)
                 )
             }
             Spacer(modifier = Modifier.height(32.dp))
