@@ -1,7 +1,6 @@
 package com.example.lemonade_app
 
 import android.annotation.SuppressLint
-import android.icu.text.ListFormatter.Width
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,14 +11,13 @@ import androidx.compose.material.*
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,17 +52,21 @@ fun LemonadeApp() {
                 Text(
                     text = stringResource(id = R.string.top_bar),
                     fontSize = 30.sp,
-                    color = Color.Black
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold
                 )
             },
-            colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = Color(249,228,76,255)),
+            colors = TopAppBarDefaults.mediumTopAppBarColors(
+                containerColor = Color(
+                    249,
+                    228,
+                    76,
+                    255
+                )
+            ),
         )
     }, content = {
-        LemonScreen(
-            textLabelResourceId = R.string.lemon_select,
-            drawableResourceId = R.drawable.lemon_tree,
-            contentDescriptionId = R.string.tree_content_description,
-        )
+        ScreenViewChange()
     }
     )
 }
@@ -75,6 +77,7 @@ fun LemonScreen(
     textLabelResourceId: Int,
     drawableResourceId: Int,
     contentDescriptionId: Int,
+    onLemonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -86,7 +89,7 @@ fun LemonScreen(
             modifier = Modifier.fillMaxSize()
         ) {
             Button(
-                onClick = { /*TODO*/ },
+                onClick = { onLemonClick() },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(195, 236, 219, 255)),
                 shape = RoundedCornerShape(48.dp)
             ) {
@@ -104,4 +107,36 @@ fun LemonScreen(
             Text(text = stringResource(textLabelResourceId))
         }
     }
+}
+
+@Composable
+fun ScreenViewChange() {
+    var currentStep by remember { mutableStateOf(0) }
+
+    val textLabelResourceId = when (currentStep) {
+        0 -> R.string.lemon_select
+        1 -> R.string.squeeze
+        2 -> R.string.drink_lemon
+        else -> R.string.restart_message
+    }
+
+    val drawableResourceId = when (currentStep){
+        0 -> R.drawable.lemon_tree
+        1 -> R.drawable.lemon_squeeze
+        2 -> R.drawable.lemon_drink
+        else -> R.drawable.lemon_restart
+    }
+
+    val contentDescriptionId = when(currentStep){
+        0 -> R.string.tree_content_description
+        1 -> R.string.lemon_content_description
+        2 -> R.string.glass_content_description
+        else -> R.string.empty_content_description
+    }
+
+    LemonScreen(
+        textLabelResourceId = textLabelResourceId,
+        drawableResourceId = drawableResourceId,
+        contentDescriptionId = contentDescriptionId,
+        onLemonClick = { currentStep = (currentStep + 1).rem(4) })
 }
