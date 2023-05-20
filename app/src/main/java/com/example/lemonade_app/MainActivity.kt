@@ -112,6 +112,7 @@ fun LemonScreen(
 @Composable
 fun ScreenViewChange() {
     var currentStep by remember { mutableStateOf(0) }
+    var tapTally = (1..4).random()
 
     val textLabelResourceId = when (currentStep) {
         0 -> R.string.lemon_select
@@ -120,14 +121,14 @@ fun ScreenViewChange() {
         else -> R.string.restart_message
     }
 
-    val drawableResourceId = when (currentStep){
+    val drawableResourceId = when (currentStep) {
         0 -> R.drawable.lemon_tree
         1 -> R.drawable.lemon_squeeze
         2 -> R.drawable.lemon_drink
         else -> R.drawable.lemon_restart
     }
 
-    val contentDescriptionId = when(currentStep){
+    val contentDescriptionId = when (currentStep) {
         0 -> R.string.tree_content_description
         1 -> R.string.lemon_content_description
         2 -> R.string.glass_content_description
@@ -138,5 +139,17 @@ fun ScreenViewChange() {
         textLabelResourceId = textLabelResourceId,
         drawableResourceId = drawableResourceId,
         contentDescriptionId = contentDescriptionId,
-        onLemonClick = { currentStep = (currentStep + 1).rem(4) })
+        onLemonClick = {
+            currentStep = if (currentStep == 1) {
+                tapTally--
+                if (tapTally == 0){
+                    (currentStep +1)
+                } else {
+                    1
+                }
+            } else {
+                (currentStep +1).rem(4)
+            }
+        }
+    )
 }
